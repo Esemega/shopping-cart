@@ -32,22 +32,69 @@ const cartList = [
 
 // ----------- MANDATORY ----------------------
 //List all products
-function print(product) {
-    console.log("------");
-    for (key in product) {
-      console.log(key.toUpperCase() + ":" + product[key]);
-    }
+function printProduct(product) {
+  console.log("------");
+  for (key in product) {
+    console.log(key.toUpperCase() + ":" + product[key]);
+  }
 }
 
-console.log("PRODUCTOS DE LA CESTA :")
-for (product of cartList) {
-  print(product);
-}
+const printCart = (cartList) => {
+  console.log("PRODUCTOS DE LA CESTA :");
+  for (product of cartList) {
+    printProduct(product);
+  }
+};
+
+printCart(cartList);
+
 //Remove the item with the id 54657
+const findById = (id) => {
+  for (product of cartList) {
+    if (product.id === id) {
+      return product;
+    }
+  }
+};
+
+const removeById = (cartList, id) => {
+  const indexOfproductToRemove = cartList.indexOf(findById(id));
+  const productRemoved = cartList.splice(indexOfproductToRemove, 1);
+  console.log(`El producto con id ${productRemoved[0].id} ha sido eliminado.`);
+};
+
+console.log("******************************************");
+console.log("Eliminar producto con id 54657:");
+removeById(cartList, 54657);
+console.log("La cesta se ha actualizado:");
+printCart(cartList);
 
 //Calculate the total (price*quantity)
+const calculateTotal = (cartList) => {
+  let total = 0;
+  for (product of cartList) {
+    total += product.price * product.count;
+  }
+  return total;
+};
+
+console.log("****************");
+console.log("Total:" + calculateTotal(cartList) + "€");
 
 //Filter the items premium
+const findPremiumProducts = (cartList) => {
+  let premiumProducts = [];
+  for (product of cartList) {
+    if (product.premium === true) {
+      premiumProducts.push(product);
+    }
+  }
+  return premiumProducts;
+};
+
+console.log("****************");
+console.log("Estos son los productos Premium de tu cesta:");
+printCart(findPremiumProducts(cartList));
 
 // ----------- OPTIONAL ----------------------
 //if al poducts are premium show a message
