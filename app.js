@@ -1,5 +1,5 @@
 //starting values
-const carrito = [
+const cartList = [
   {
     id: 198752,
     name: "Tinta DJ27 Color",
@@ -32,7 +32,17 @@ const carrito = [
 
 // ----------- MANDATORY ----------------------
 //List all products
+function print(product) {
+    console.log("------");
+    for (key in product) {
+      console.log(key.toUpperCase() + ":" + product[key]);
+    }
+}
 
+console.log("PRODUCTOS DE LA CESTA :")
+for (product of cartList) {
+  print(product);
+}
 //Remove the item with the id 54657
 
 //Calculate the total (price*quantity)
