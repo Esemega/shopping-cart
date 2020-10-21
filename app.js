@@ -118,6 +118,45 @@ console.log(shippingCostMessage);
 
 //Show the cart by html basic list
 
+const getHtmlProduct = (product) => {
+  // Creating an unordered list
+  let htmlProduct = document.createElement("ul");
+  htmlProduct.id = "product";
+  // Create a list item for each property
+  // and append it to the list
+  for (key in product) {
+    let property = document.createElement("li");
+    property.className = "product-"+key;
+
+    switch (key) {
+      case "price":
+        property.textContent = product[key] + " €";
+        break;
+      case "premium":
+        property.className = product[key]?"product-"+key: "product-no-"+key;
+        property.textContent = "Producto premium";
+        break;
+    
+      default:
+        property.textContent = product[key];
+        break;
+    }
+
+    htmlProduct.appendChild(property);
+    
+  }
+  let htmlCartList = document.querySelector("#cart-list");
+  htmlCartList.appendChild(htmlProduct);
+};
+
+const getHtmlCartList = (cartList) => {
+  for (product of cartList) {
+    getHtmlProduct(product);
+  }
+};
+
+getHtmlCartList(cartList);
+
 //Apply 5% discount if the total is more than 100€
 
 console.log("****************");
