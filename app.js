@@ -32,12 +32,12 @@ const cartList = [
 
 // ----------- MANDATORY ----------------------
 //List all products
-function printProduct(product) {
+const printProduct = (product) => {
   console.log("------");
   for (key in product) {
     console.log(key.toUpperCase() + ":" + product[key]);
   }
-}
+};
 
 const printCart = (cartList) => {
   console.log("PRODUCTOS DE LA CESTA :");
@@ -78,8 +78,9 @@ const calculateTotal = (cartList) => {
   return total;
 };
 
+let total = calculateTotal(cartList);
 console.log("****************");
-console.log("Total:" + calculateTotal(cartList) + "€");
+console.log("Total:" + total + "€");
 
 //Filter the items premium
 const findPremiumProducts = (cartList) => {
@@ -97,8 +98,35 @@ console.log("Estos son los productos Premium de tu cesta:");
 printCart(findPremiumProducts(cartList));
 
 // ----------- OPTIONAL ----------------------
-//if al poducts are premium show a message
+//if all poducts are premium show a message
+const allProductsArePremium = (cartList) => {
+  let isPremium = false;
+
+  for (product of cartList) {
+    isPremium = product.premium;
+  }
+
+  return isPremium;
+};
+
+const shippingCostMessage = allProductsArePremium(cartList)
+  ? "Pedido sin gastos de envío."
+  : "Este pedido tiene gastos de envío.";
+
+console.log("****************");
+console.log(shippingCostMessage);
 
 //Show the cart by html basic list
 
 //Apply 5% discount if the total is more than 100€
+
+console.log("****************");
+if (total > 100) {
+  total = total - total * 0.05;
+  console.log("¡Enhorabuena! ¡Se aplica un descuento del 5%!");
+} else {
+  console.log("No se aplica descuento.");
+}
+
+console.log("****************");
+console.log("Total:" + total + "€");
