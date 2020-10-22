@@ -116,6 +116,21 @@ const shippingCostMessage = allProductsArePremium(cartList)
 console.log("****************");
 console.log(shippingCostMessage);
 
+//Apply 5% discount if the total is more than 100€
+
+let discountMessage = "";
+console.log("****************");
+if (total > 100) {
+  total = total - total * 0.05;
+  discountMessage = "¡Enhorabuena! ¡Se aplica un descuento del 5%!";
+} else {
+  discountMessage ="No se aplica descuento.";
+}
+
+console.log(discountMessage);
+console.log("****************");
+console.log("Total:" + total + "€");
+
 //Show the cart by html basic list
 
 const getHtmlProduct = (product) => {
@@ -156,16 +171,6 @@ const getHtmlCartList = (cartList) => {
 };
 
 getHtmlCartList(cartList);
-
-//Apply 5% discount if the total is more than 100€
-
-console.log("****************");
-if (total > 100) {
-  total = total - total * 0.05;
-  console.log("¡Enhorabuena! ¡Se aplica un descuento del 5%!");
-} else {
-  console.log("No se aplica descuento.");
-}
-
-console.log("****************");
-console.log("Total:" + total + "€");
+document.getElementById("cart-total").innerText = total.toFixed(2)  + " €"
+document.getElementById("shipping-cost-message").innerText = shippingCostMessage;
+document.getElementById("discount-message").innerText = discountMessage;
